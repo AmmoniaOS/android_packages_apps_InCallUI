@@ -35,6 +35,8 @@ import android.telephony.SubInfoRecord;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import com.android.internal.util.one.PhoneLocation;
+import com.android.internal.util.one.OneUtils;
 
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
@@ -407,14 +409,25 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         if (isConference) {
             return mContext.getResources().getString(R.string.card_title_conf_call);
         }
-        if (TextUtils.isEmpty(contactInfo.name)) {
-            if (!TextUtils.isEmpty(contactInfo.location)){
-                return contactInfo.number + " " + contactInfo.location;
+        if (OneUtils.isSupportLanguage(true)) {
+            CharSequence location = PhoneLocation.getCityFromPhone(contactInfo.number);
+            if (TextUtils.isEmpty(contactInfo.name)) {
+                if (!TextUtils.isEmpty(location)) {
+                    return contactInfo.number + " " + location;
+                }
+                return contactInfo.number;
             }
-            return contactInfo.number;
-        }
-        return contactInfo.name;
-    }
+            return !TextUtils.isEmpty(location) ? contactInfo.name + " " + location : contactInfo.name;
+        } else {
+            if (TextUtils.isEmpty(contactInfo.name)) {
+                if (!TextUtils.isEmpty(contactInfo.location)) {
+                    return contactInfo.number + " " + contactInfo.location;
+                }
+                return contactInfo.number;
+             }
+            return contactInfo.name;
+         }
+     }
 
     private void addPersonReference(Notification.Builder builder, ContactCacheEntry contactInfo,
             Call call) {
