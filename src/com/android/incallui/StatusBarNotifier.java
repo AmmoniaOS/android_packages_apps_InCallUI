@@ -35,7 +35,6 @@ import android.telephony.SubInfoRecord;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import com.android.internal.util.one.PhoneLocation;
 import com.android.internal.util.one.OneUtils;
 
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
@@ -410,7 +409,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
             return mContext.getResources().getString(R.string.card_title_conf_call);
         }
         if (OneUtils.isSupportLanguage(true)) {
-            CharSequence location = PhoneLocation.getCityFromPhone(contactInfo.number);
+            CharSequence location = OneUtils.getCityFromPhone(contactInfo.number);
             if (TextUtils.isEmpty(contactInfo.name)) {
                 if (!TextUtils.isEmpty(location)) {
                     return contactInfo.number + " " + location;
