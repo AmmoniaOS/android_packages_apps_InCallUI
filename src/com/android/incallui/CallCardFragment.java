@@ -222,7 +222,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         IntentFilter filter = new IntentFilter();
         filter.addAction(RECORD_STATE_CHANGED);
 
-        mInCallActivity = (InCallActivity)getActivity();
+        mInCallActivity = (InCallActivity) getActivity();
     }
 
 

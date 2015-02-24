@@ -36,6 +36,7 @@ import android.telecom.VideoProfile;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import com.android.internal.util.one.PhoneLocation;
 import com.android.internal.util.one.OneUtils;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -726,7 +727,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
          // If the name is empty, we use the number for the name...so dont show a second
          // number in the number field
         if (OneUtils.isSupportLanguage(true)) {
-            CharSequence location = OneUtils.getCityFromPhone(contactInfo.number);
+            CharSequence location = PhoneLocation.getCityFromPhone(contactInfo.number);
             if (TextUtils.isEmpty(contactInfo.name)) {
                 return String.valueOf(location);
             }

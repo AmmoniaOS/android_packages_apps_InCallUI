@@ -104,6 +104,7 @@
         <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
         <item name="android:popupMenuStyle">@style/InCallPopupMenuStyle</item>
         <item name="android:actionBarStyle">@style/InCallActionBarStyle</item>
+        <item name="android:navigationBarColor">@color/dialer_theme_color_dark</item>
     </style>
 
     <style name="InCallPopupMenuStyle" parent="@android:style/Theme.Material.Light">
